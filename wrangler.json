@@ -1,14 +1,13 @@
-
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "mini-forum-local",
+  "name": "mini-forum-prod",
   "main": "src/index.js",
   "compatibility_date": "2026-08-06",
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "mini-forum-local",
-      "database_id": "local-dev-db",
+      "database_name": "mini-forum-dev",
+      "database_id": "44ef6924-b9bc-4444-a89c-29700dd62782",
       "migrations_dir": "migrations"
     }
   ]
