@@ -15,17 +15,17 @@ resource "cloudflare_workers_script" "forum_worker" {
   compatibility_date = "2026-08-06"
 
   bindings = [
-      {
-        name = "DB"
-        type = "d1"
-        id   = cloudflare_d1_database.forum.id
-      },
-      {
-        name         = "ASSETS"
-        type         = "kv_namespace"
-        namespace_id = cloudflare_workers_kv_namespace.forum_assets.id
-      }
-    ]
+    {
+      name = "DB"
+      type = "d1"
+      id   = cloudflare_d1_database.forum.id
+    },
+    {
+      name         = "ASSETS"
+      type         = "kv_namespace"
+      namespace_id = cloudflare_workers_kv_namespace.forum_assets.id
+    }
+  ]
 }
 
 resource "cloudflare_workers_kv_namespace" "forum_assets" {
