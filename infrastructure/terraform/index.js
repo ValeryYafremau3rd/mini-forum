@@ -2,6 +2,23 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === "/" && request.method === "GET") {
+      const html = await env.ASSETS.get("index.html");
+
+      if (html === null) {
+        return new Response("Frontend not uploaded", {
+          status: 404,
+        });
+      }
+
+      return new Response(html, {
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "public, max-age=60",
+        },
+      });
+    }
+
     if (url.pathname === "/api/messages" && request.method === "GET") {
       const result = await env.DB.prepare(
         `SELECT id, username, message, created_at
@@ -64,10 +81,7 @@ export default {
     }
 
     if (url.pathname === "/api/messages") {
-      return Response.json(
-        { error: "Method not allowed" },
-        { status: 405 },
-      );
+      return Response.json({ error: "Method not allowed" }, { status: 405 });
     }
 
     return Response.json({ error: "Not found" }, { status: 404 });
